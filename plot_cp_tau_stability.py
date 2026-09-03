@@ -67,7 +67,7 @@ def generate_tau_stability_data(
     c_fBm : float, default=1.0
         Topothesy parameter of the fBm model.
     seed : int, default=20260901
-        Master seed for reproducible simulation.
+        Root seed for reproducible simulation.
 
     Returns
     -------

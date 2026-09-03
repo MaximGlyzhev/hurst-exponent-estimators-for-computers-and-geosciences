@@ -23,7 +23,7 @@ def generate_cp_parameter_results(
     H_values: tuple[float, ...] = H_VALUES,
     L_values: tuple[int, ...] = L_VALUES,
     c_fBm: float = 1.0,
-    master_seed: int = 20260902,
+    root_seed: int = 20260902,
     n_workers: int = 1,
     configuration_limit: int | None = None,
 ) -> list[dict]:
@@ -36,7 +36,7 @@ def generate_cp_parameter_results(
         method="CP", configuration_factory=cp_configurations,
         estimator=_estimate_cp, output_path=output_path,
         number_of_profiles=number_of_profiles, H_values=H_values,
-        L_values=L_values, c_fBm=c_fBm, master_seed=master_seed,
+        L_values=L_values, c_fBm=c_fBm, root_seed=root_seed,
         n_workers=n_workers, configuration_limit=configuration_limit,
     )
 

@@ -51,7 +51,7 @@ GAP_CONFIGURATIONS = (
 TAU = 3
 N_V = 10_000
 L_V = 1_000
-MASTER_SEED = 20260902
+ROOT_SEED = 20260902
 
 
 def evaluate_configuration(
@@ -141,7 +141,7 @@ def generate_table_data(
     tau: int = TAU,
     N_v: int = N_V,
     L_v: int = L_V,
-    seed: int = MASTER_SEED,
+    seed: int = ROOT_SEED,
 ) -> list[dict[str, float | int]]:
     """Generate all rows of the missing-observation results table."""
     cases = [(H, L, q) for H in H_values for L, q in configurations]
@@ -186,7 +186,7 @@ def write_results(rows: list[dict[str, float | int]], output: Path) -> None:
         "tau": TAU,
         "N_v": N_V,
         "L_v": L_V,
-        "master_seed": MASTER_SEED,
+        "root_seed": ROOT_SEED,
         "python": platform.python_version(),
         "numpy": np.__version__,
     }

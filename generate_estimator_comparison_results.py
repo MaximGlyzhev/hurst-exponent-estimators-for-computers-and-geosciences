@@ -198,7 +198,7 @@ def generate_estimator_comparison_results(
     H_values: tuple[float, ...] = H_VALUES,
     L_values: tuple[int, ...] = L_VALUES,
     c_fBm: float = 1.0,
-    master_seed: int = 20260901,
+    root_seed: int = 20260901,
     n_workers: int | None = None,
 ) -> list[dict]:
     """Generate and save the numerical data underlying the comparison plot.
@@ -217,7 +217,7 @@ def generate_estimator_comparison_results(
     c_fBm : float, default=1.0
         fBm amplitude parameter. It does not affect the five H estimates for
         unmodified profiles.
-    master_seed : int, default=20260901
+    root_seed : int, default=20260901
         Seed from which deterministic task-specific seeds are derived.
     n_workers : int, optional
         Number of worker processes. Defaults to one less than the available
@@ -256,7 +256,7 @@ def generate_estimator_comparison_results(
     run_start = time.perf_counter()
     started_at = datetime.now(timezone.utc).isoformat()
     configurations = [(float(H), int(L)) for H in H_values for L in L_values]
-    sequences = np.random.SeedSequence(master_seed).spawn(len(configurations))
+    sequences = np.random.SeedSequence(root_seed).spawn(len(configurations))
     tasks = [
         (H, L, number_of_profiles, c_fBm, int(seq.generate_state(1)[0]))
         for (H, L), seq in zip(configurations, sequences)

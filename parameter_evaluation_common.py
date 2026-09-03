@@ -153,14 +153,14 @@ def run_parameter_evaluation(
     H_values: tuple[float, ...] = H_VALUES,
     L_values: tuple[int, ...] = L_VALUES,
     c_fBm: float = 1.0,
-    master_seed: int = 20260902,
+    root_seed: int = 20260902,
     n_workers: int = 1,
     configuration_limit: int | None = None,
 ) -> list[dict]:
     """Run and save one method-specific parameter evaluation.
 
     ``configuration_limit`` is intended only for smoke tests. All separate
-    method generators use the same seed derivation, so equal ``master_seed``,
+    method generators use the same seed derivation, so equal ``root_seed``,
     ``H_values``, and ``L_values`` produce identical fBm samples.
     """
     if number_of_profiles < 2:
@@ -173,7 +173,7 @@ def run_parameter_evaluation(
     started_at = datetime.now(timezone.utc).isoformat()
     run_start = time.perf_counter()
     combinations = [(float(H), int(L)) for H in H_values for L in L_values]
-    sequences = np.random.SeedSequence(master_seed).spawn(len(combinations))
+    sequences = np.random.SeedSequence(root_seed).spawn(len(combinations))
     configuration_counts = []
     for _, L in combinations:
         count = len(configuration_factory(L))
@@ -247,7 +247,7 @@ def run_parameter_evaluation(
                 f"number_of_profiles={number_of_profiles}",
                 f"H_values={tuple(H_values)}",
                 f"L_values={tuple(L_values)}",
-                f"master_seed={master_seed}",
+                f"root_seed={root_seed}",
                 f"n_workers={n_workers}",
                 f"total_runtime_seconds={total_runtime}",
                 f"started_at_utc={started_at}",

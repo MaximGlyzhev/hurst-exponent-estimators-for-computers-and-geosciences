@@ -236,7 +236,7 @@ def generate_parameter_evaluation_results(
     L_values: tuple[int, ...] = L_VALUES,
     methods: tuple[str, ...] = METHODS,
     c_fBm: float = 1.0,
-    master_seed: int = 20260902,
+    root_seed: int = 20260902,
     n_workers: int = 1,
     configuration_limit: int | None = None,
 ) -> list[dict]:
@@ -254,7 +254,7 @@ def generate_parameter_evaluation_results(
         Subset of ``CP, DFA, HFD, PSD, SVA`` to evaluate.
     c_fBm : float, default=1.0
         fBm amplitude parameter.
-    master_seed : int, default=20260902
+    root_seed : int, default=20260902
         Root seed used to derive one deterministic seed per ``(H, L)``.
     n_workers : int, default=1
         Parallel ``(H, L)`` tasks. The conservative default limits memory use;
@@ -292,7 +292,7 @@ def generate_parameter_evaluation_results(
     run_start = time.perf_counter()
     started_at = datetime.now(timezone.utc).isoformat()
     combinations = [(float(H), int(L)) for H in H_values for L in L_values]
-    sequences = np.random.SeedSequence(master_seed).spawn(len(combinations))
+    sequences = np.random.SeedSequence(root_seed).spawn(len(combinations))
     tasks = [
         (
             H, L, number_of_profiles, c_fBm,
