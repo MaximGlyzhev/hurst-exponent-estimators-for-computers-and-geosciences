@@ -6,6 +6,14 @@ It provides five Hurst exponent estimators, exact one-dimensional fractional
 Brownian motion (fBm) simulation, parameter studies, estimator comparisons,
 and stability experiments for the change-probability (CP) method.
 
+## Documentation
+
+- [`USER_GUIDE.md`](USER_GUIDE.md) documents inputs, outputs, options,
+  expected behaviour, and the scripts used for the numerical studies.
+- [`TUTORIAL.md`](TUTORIAL.md) provides a step-by-step workflow from
+  installation and synthetic profile generation to estimator comparison and
+  stability tests.
+
 ## Requirements
 
 - Python 3.10 or newer
